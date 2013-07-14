@@ -34,12 +34,11 @@ module Spree
       private
 
       def update_styles(params)
+				params[:banner_styles] = {} unless params[:banner_styles]
         params[:new_banner_styles].each do |index, style|
           params[:banner_styles][style[:name]] = style[:value] unless style[:value].empty?
         end if params[:new_banner_styles].present?
-
         styles = params[:banner_styles]
-
         Spree::Config[:banner_styles] = ActiveSupport::JSON.encode(styles) unless styles.nil?
       end
 
